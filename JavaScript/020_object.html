@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>object</title>
+    </head>
+    <body>
+        <script>
+            // Object
+
+            // 1. 기본 형태
+            let newuser = {
+                //key : value
+                id: "licat",
+                pw: "1234", // 실무에서는 해시값으로 변경해서 사용. ex) 81DC9BDB52D04DC20036DBD8313ED055
+                name: "leehojun",
+                email: "paul@weniv.com",
+                active: true,
+            };
+
+            console.log(newuser["id"]);
+            console.log(newuser.id);
+
+            // 2. 아래와 같은 형태로 많이 사용
+            let user = [
+                {
+                    id: "hojun",
+                    pw: "1234", // 실무에서는 pw를 해시로 저장
+                    name: "leehojun",
+                    email: "paul@weniv.com",
+                    active: true,
+                },
+                {
+                    id: "lion",
+                    pw: "2345",
+                    name: "leehojun",
+                    email: "pa@weniv.com",
+                    active: true,
+                },
+            ];
+
+            console.log(user[0]["id"]);
+            console.log(user[0].id);
+
+            // 3. 아래와 같이 선언이 가능
+            let a = 10;
+            let b = 20;
+            let c = 30;
+            let e = {a, b, c};
+            console.log(e);
+
+            let test = ["one", "two", "three"];
+            console.log(test);
+
+            // 4. 값을 변경 가능
+            e["a"] = 50;
+            console.log(e);
+
+            // 5. key 값으로 문자열 외에 다른 값을 넣었을 경우
+            let txt = "hello";
+            let txt2 = {
+                0: "h",
+                1: "e",
+                2: "l",
+                3: "l",
+                4: "o",
+            };
+
+            console.log(txt[1]);
+            console.log(txt2[1]); // 유사 배열 객체
+
+            // console.log(txt2.1); // map
+            // console.log(txt2, {one: 1}); // map
+
+            // 6. value의 값으로 문자열 외에 다른 값을 넣었을 경우
+            let test2 = {
+                one: sum,
+                two: console.log,
+                three: window.innerWidth,
+                four: [10, 20, 30],
+                five: "10",
+                six: 100,
+            };
+            console.log(test2);
+            test2.two("호준");
+
+            // 7. key와 value만 뽑아낼 수 없을까?
+            console.log(Object.keys(newuser));
+            console.log(Object.values(newuser));
+            console.log(Object.entries(newuser));
+
+            // map 에서 사용 가능
+            // newuser.keys();
+            // newuser.values();
+            // newuser.entries();
+
+            // 8. object spread 용법
+            // https://ko.javascript.info/rest-parameters-spread
+            // let newuser = {
+            //     id: "licat",
+            //     pw: "1234",
+            //     name: "leehojun",
+            //     email: "paul@weniv.com",
+            //     active: true,
+            // };
+            let 회원정보업데이트 = {
+                name: "cat",
+                email: "jun@naver.com",
+            };
+
+            // newuser["name"] = 회원정보업데이트["name"];
+            // newuser["email"] = 회원정보업데이트["email"];
+            // console.log(newuser);
+
+            newuser = {...newuser, ...회원정보업데이트};
+            console.log(newuser);
+
+            // newuser2가 newuser 를 가르키게 되고 newuser2를 수정하면 newuser가 변경된다.
+            let newuser2 = newuser;
+            newuser2["id"] = "helloworld222";
+            console.log(newuser);
+            console.log(newuser2);
+
+            // spread 기법을 사용하면 원본을 만지지 않고 사용할 수 있다.
+            let newuser3 = {...newuser};
+            newuser3["id"] = "helloworld333";
+            console.log(newuser);
+            console.log(newuser3);
+
+            // Function
+            function sum(x, y) {
+                return x + y;
+            }
+
+            // console.log(typeof sum);
+            // sum.value = 'hojun';
+            // console.log(console.dir(sum));
+            // console.log(sum.value);
+            // console.log(typeof sum);
+        </script>
+    </body>
+</html>

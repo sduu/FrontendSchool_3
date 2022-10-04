@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>논리연산자</title>
+    </head>
+    <body>
+        <script>
+            // true : 1
+            // false : 0
+            // and(&&) : 곱
+            // or(||) : 합
+            // not(!) : 부정
+
+            console.log(true || false); // true
+            console.log(true || true); // true
+            console.log(true && false); // false
+            console.log(!false); // true
+            console.log(!!false); // false (실무에서 많이 사용)
+            console.log(!!""); // false (boolean 타입이 아닌 데이터를 boolean으로 표현하고 싶을 때 사용)
+
+            let couponlist = ["9b5fcc71", "9b5fcc72", "9b5fcc73"];
+            user = [
+                {
+                    userid: 1,
+                    username: "hojun",
+                    쿠폰사용가능여부: !!couponlist[0],
+                    coupon: couponlist[0],
+                },
+            ];
+
+            // 우리를 여전히 힘들게 하는 JS
+            console.log(!![]);
+
+            console.log("-----------");
+            console.log("confuse_1");
+            console.log("false" == false);
+            console.log(!"false");
+            console.log(!"0");
+            console.log(!!NaN);
+            console.log(!!null);
+            console.log(!!undefined);
+
+            // 단락평가 (간단한 코드에서 권고)
+            console.log("-----------");
+            username = "";
+            username = username && "이름을 입력하지 않으신 분";
+            console.log(username);
+
+            username = "abc";
+            username = username && "이름을 입력하지 않으신 분";
+            console.log(username);
+
+            // 문제 : username과 pw를 모두 입력하면 true 반환하기
+            username = "";
+            pw = "";
+            회원가입성공여부 = username && pw;
+            console.log(!!회원가입성공여부);
+
+            // 정답 리스트
+            회원가입성공여부 = username && pw ? true : false;
+            회원가입성공여부 = !!(username && pw);
+            회원가입성공여부 = !(!username || !pw);
+            회원가입성공여부 = !!pw && !!username;
+
+            console.log("-----------");
+            console.log("드모르간 법칙");
+            const x = 0;
+            const y = 1;
+            console.log(!(x || y) === (!x && !y));
+            console.log(!(x && y) === (!x || !y));
+
+            // 알고리즘 문제
+            for (let i = 0; i < 100; i++) {
+                // if (i % 3 == 0) {
+                //     console.log(i);
+                // }
+
+                // if (i % 5 == 0) {
+                //     console.log(i);
+                // }
+
+                if (i % 3 == 0 || i % 5 == 0) {
+                    console.log(i);
+                }
+            }
+        </script>
+    </body>
+</html>

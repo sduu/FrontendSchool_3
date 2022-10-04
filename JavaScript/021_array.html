@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>array</title>
+    </head>
+    <body>
+        <script>
+            // 0. array
+            // 값의 변경이 가능
+            // 대부분 동일한 형태가 반복
+            let 과일 = ["사과", "수박", "복숭아", "딸기", "바나나"];
+            console.log(과일[1]); // 수박
+
+            let 꺼낸과일 = 과일.pop();
+            console.log("거낸과일 : " + 꺼낸과일);
+
+            과일.push("멜론");
+            console.log(과일);
+
+            과일.push(꺼낸과일);
+            console.log(과일);
+
+            과일.shift();
+            console.log(과일);
+
+            // 0. matrix(행렬)에서 값 찾기
+            let array = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9],
+            ];
+            console.log(array[1][2]); // 6
+
+            // 테트리스
+            let testalgo = [
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [7, 0, 0, 0, 0, 0, 0],
+                [7, 0, 0, 0, 0, 0, 0],
+                [7, 0, 0, 0, 0, 0, 0],
+            ];
+            // 방법1 : testalgo[4][0] == testalgo[3][0] == testalgo[2][0];
+            // 방법2 : 1차원으로 펼치고 8의 배수 index로만 확인
+            // testalgo[16] == testalgo[24] == testalgo[32];
+
+            // tmi
+            function sum(x, y) {
+                return x + y;
+            }
+            let test = [1, 2, 3];
+            let obj = {one: 1, two: 2};
+            let data = [console.log, sum, test, obj];
+        </script>
+    </body>
+</html>

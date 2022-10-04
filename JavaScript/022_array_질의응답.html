@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>array 질의응답</title>
+    </head>
+    <body>
+        <script>
+            // 원본 수정 없이 값을 수정하고 싶을 때
+            let x = [10, 20, 30, 40];
+            let y = [...x].pop();
+            console.log(y); // 40
+
+            let z = [...x];
+            z.pop();
+            console.log(z); // [10, 20, 30]
+        </script>
+    </body>
+</html>

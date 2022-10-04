@@ -66,7 +66,7 @@
             // 거듭제곱
             console.log(Math.pow(2, 3));
 
-            // computer의 10진수 연산은 정확하지 않음
+            // computer의 10진수 연산은 정확하지 않다.
             // 부동소수점 이슈
             // 0.1 + 0.2
             // 0.30000000000000004
@@ -76,11 +76,32 @@
             // 0.8999999999999999
 
             // JS에서 큰 숫자를 사용할 때에는 BigInt를 사용
-            // console.log(Number.MAX_SAFE_INTEGER)
+            // The proposal belongs to ECMAScript 2020, which is the 11th edition
+            // console.log(Number.MAX_SAFE_INTEGER)  // 2^53 - 1
+            // BigInt(12312312312312312312) + BigInt(2) // 제대로 작동하지 않음
+            // BigInt(Number.MAX_SAFE_INTEGER)
+            // BigInt(Number.MAX_SAFE_INTEGER) + 1000n // 제대로 작동(숫자 자체가 MAX_SAFE_INTEGER를 넘어가면 제대로 표현하지 못함)
+            // BigInt(5) + 5n
+            // BigInt(5) + 5 // error
+            // BigInt(5) / 2n // 2n (소수 표현 안됨)
+            // BigInt("10") + BigInt("10") // 큰 값을 정수로 입력받을 때에는 string으로 처리해서 받아야 함
 
-            // BigInt(12312312312312312312) + BigInt(2)
-            123123123123123123121333n + 2n;
-            // 12312312312312311810n
+            // 추가 정리 :
+            // Number의 MAX_SAFE_INTEGER, MIN_SAFE_INTEGER 으로 Number 타입에서 한계치로 다룰 수 있는 정수값을 알 수 있다.
+            console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+
+            // Number.MAX_SAFE_INTEGER의 값보다 큰 값으로 평가되는 표현식은 정상적인 값을 출력하지 않는다.
+            console.log(Number.MAX_SAFE_INTEGER + 2); // 9007199254740992
+
+            // 이는 BigInt 타입의 값을 만들어 계산하는 방법으로 해결이 가능하다. BigInt를 호출하거나 숫자 뒤에 n을 붙여 값을 만들 수 있다.
+            // BigInt형의 값은 BigInt형의 값만으로 연산할 수 있으며, 연산의 결과는 언제나 소수점 이하를 버린다.
+            // console.log(BigInt(5) + 5); // TypeError
+            console.log(BigInt(10) + 10n); // 20n
+            console.log(BigInt(Number.MAX_SAFE_INTEGER) + 1000n); // 9007199254740991
+
+            // BigInt 타입이더라도 숫자 자체가 MAX_SAFE_INTEGER를 넘어가면 정확히 표현하지 못한다.
+            // 큰 값을 정수로 입력받을 때에는 string으로 처리해서 받아야 한다.
+            console.log(BigInt(12312312312312312312) + BigInt(2)); // 12312312312312311810n
 
             /*
             정보처리기사
@@ -94,6 +115,11 @@
             1024GB = 1TB
             (KB,MB,GB,TB,PB)갈매기털빼
             */
+
+            let one = 10;
+            console.log(one.toString());
+            // console.log(10.toString());
+            // .을 소수점으로 판단
         </script>
     </body>
 </html>
