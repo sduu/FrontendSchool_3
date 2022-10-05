@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>array</title>
+    </head>
+    <body>
+        <script>
+            // 배열안 배열일때 ([].[])
+            let fruit = [
+                ["메론", "수박"],
+                ["포도", "체리"],
+            ];
+
+            // 일반적 배열 방법 [요소(원소)]
+            let arry = ["정어리", "고등어", "참치"];
+
+            // 키와 value가 있을 때 {}
+            let myobj = {val1: 10, val2: 30};
+
+            // 생성 방법 1 : 리터럴 (변수에 할당되기 전의 값이다.)
+            let myarry = [];
+
+            // 생성 방법 2 : Array() 생성자
+            let myarry2 = new Array();
+            let myarry3 = new Array(5);
+            let myarry4 = new Array(1, 2, 3);
+
+            // 인덱스 번호를 통해 값에 접근
+            console.log(myarry4[0]);
+            console.log("hello"[2]);
+
+            // string 타입과 다르게 새로운 값을 변경 가능 (mutable)
+            // string 타입의 불변성 (immutable)
+            myarry4[0] = 100;
+            "hello"[0] = "t";
+            console.log(myarry4[0]);
+            console.log("hello"[0]);
+
+            // 생성과 동시에 값에 접근 가능
+            console.log([1, 2, 3, 4][2]);
+
+            // 배열에 존재하지 않는 인덱스에 접근하는 것도 가능
+            console.log([1, 2, 3, 4][5]);
+
+            // 메소드
+            let cafe = ["coffee", "cake", "tea", "cookie"];
+
+            // 맨 앞에서 요소를 추가할 때에는 unshift()
+            // 배열의 새로운 길이를 반환
+            console.log(myarry4.unshift(), myarry4);
+
+            // 맨 앞에서 요소를 지울 때에는 shift()
+            // 제거된 첫 번째 요소를 반환
+            console.log(myarry4.shift(), myarry4);
+
+            // 맨 뒤에서 요소를 추가할 때에는 push()
+            // 배열의 새로운 길이를 반환
+            console.log(myarry4.unshift(10), myarry4);
+
+            // 맨 뒤에서 요소를 제거할 때에는 pop()
+            // 제거된 요소를 반환
+            console.log(myarry4.pop(), myarry4);
+
+            // 특정한 인덱스에 요소를 위치시킬 때에는 splice()
+            // 특정 요소를 제거할 때에도 splice()
+            // splice(시작 인덱스 [, 제거할 요소의 수 [, 추가할 요소]])
+            cafe.splice(1, 0, "bread");
+            console.log(cafe); // ['coffee', 'bread', 'cake', 'tea', 'cookie']
+
+            cafe.splice(-1, 2, "scone");
+            console.log(cafe); // ['coffee', 'bread', 'cake', 'tea', 'scone']
+
+            // 배열 일부분을 잘라내서 새로운 배열로 반환할 때에는 slice()
+            // 원본 배열 요소의 얕은 복사본을 반환
+            // slice(시작 인덱스, [, 종료 인덱스])
+            cafe = ["coffee", "cake", "tea", "cookie"];
+            console.log(cafe.slice(1, 3)); // ['cake', 'tea']
+            console.log(cafe.slice(-2, -1)); // ['tea']
+            console.log(cafe.slice(2)); // ['tea', 'cookie']
+
+            // 문제 : 다음 배열에서 물고기가 아닌 것을 slice로 선택해 콘솔로 출력해 보세요.
+            let fish = ["정어리", "고등어", "돌고래", "참지", "고래상어", "코끼리"];
+            console.log(fish.slice(2, 3));
+            console.log(fish.slice(-1));
+
+            // 순서를 거꾸로 뒤집고 싶다면 reverse()
+            cafe.reverse();
+            console.log(cafe);
+
+            // 조건을 만족하는 첫 번째 요소의 인덱스를 찾고 싶을 때에는 indexOf()
+            console.log(cafe.indexOf("tea")); // 1
+
+            // 인자가 배열인지 확인하고 싶을 때에는 isArray()
+            // boolean 값을 반환
+            console.log(Array.isArray(cafe));
+
+            // 요소들을 연결해 하나의 값으로 만들 때에는 join()
+            console.log(cafe.join(" "));
+
+            // 모두 똑같은 요소로 채우고 싶다면 fill()
+            // 복사본이 아닌 this 객체로 변경해 반환
+            cafe.fill("bread");
+            console.log(cafe);
+
+            cafe = ["coffee", "cake", "tea", "cookie"];
+            cafe.fill("bread", -1);
+            console.log(cafe);
+
+            cafe = ["coffee", "cake", "tea", "cookie"];
+            cafe.fill("bread", -3, -1);
+            console.log(cafe);
+
+            // 배열을 원하는 깊이로 평탄화하고 싶다면 flat()
+            let arr = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, [9, [10, 11]]],
+            ];
+            console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8, [9, [10, 11]]]
+            console.log(arr.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, [10, 11]]
+            console.log(arr.flat(Infinity)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+            // 특정 요소가 포함되었는지 확인할 때에는 includes()
+            console.log(cafe, cafe.includes("cookie")); // true
+            console.log(cafe, cafe.includes("cake", -2)); // false
+
+            // 하나의 요소라도 조건을 만족하는지 확인할 때에는 find()
+            // 특정 조건에 부합하는 1개의 값을 찾아 반환
+            const myarry5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            console.log(myarry5.find(i => i > 5)); // 6
+
+            // 모든 요소가 조건을 만족하는지 확인할 때에는 filter()
+            // 특정 조건에 부합하는 값들로 이루어진 새로운 배열을 만들어 출력
+            console.log(myarry5.filter(i => i > 5)); // [6, 7, 8, 9, 10]
+
+            // 조건을 만족하는 첫 번째 인덱스를 찾을 때 findIndex()
+            // 조건에 부합하는 배열의 맨 첫 번째 요소의 인덱스를 반환
+            console.log(myarry5.findIndex(i => i > 5)); // 5
+
+            // 각각 요소에 함수를 호출할 때에는 map()
+            console.log(myarry5.map(i => i + 10)); // [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+            // 문제 : map을 활용해서 name의 값으로 이루어진 새로운 배열을 만들기
+            var studentList = [
+                {
+                    id: 1,
+                    name: "원범",
+                    score: "great",
+                },
+                {
+                    id: 2,
+                    name: "김진",
+                    score: "nice",
+                },
+                {
+                    id: 3,
+                    name: "혜원",
+                    score: "good",
+                },
+                {
+                    id: 4,
+                    name: "재현",
+                    score: "too cool for school",
+                },
+            ];
+            const newStudentList = studentList.map(v => v.name);
+            console.log(newStudentList);
+
+            // 각각의 요소를 실행하고 싶을 때에는 forEach()
+            // map()과 다르게 순회만 함
+            console.log(myarry5.map(i => console.log(i)));
+
+            // 각 요소에 누적해주며 실행하고 싶을 때에는 reduce()
+            console.log(myarry5.reduce((a, c) => a + c, 0));
+
+            // 유사 배열 객체를 배열로 만들 때에는 Array.from()
+            // 객체 내의 모든 요소를 새로운 배열로 얕은 복사
+            console.log(Array.from("hello world"));
+            console.log(Array.from([1, 2, 3], x => x + 10));
+
+            // 배열을 합치거나 새로운 요소를 추가할 때에는 concat()
+            const myarry6 = [];
+            console.log(myarry6.concat(["cake"], "cookie", ["tea"]));
+
+            // 배열 내 요소를 정렬할 때에는 sort()
+            // string 으로 변환하여 유니코드 순서대로 정렬
+            const myarry7 = [40, 200, 100000, 3000];
+            myarry7.sort();
+            console.log(myarry7); // [100000, 200, 3000, 40]
+
+            // 반환 값이 양수 : b를 a보다 낮은 인덱스로 정렬
+            // 반환 값이 0 : 원래 순서 유지
+            // 반환 값이 음수 : a를 b보다 낮은 인덱스로 정렬
+            myarry7.sort((a, b) => a - b);
+            console.log(myarry7); // [40, 200, 3000, 100000]
+
+            myarry7.sort((a, b) => b - a);
+            myarry7.sort((a, b) => {
+                if (a < b) {
+                    return -1;
+                } else if (a > b) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+            console.log(myarry7); // [40, 200, 3000, 100000]
+
+            // stock 순으로 정렬하기
+            const studentList2 = [
+                {id: 1, product: "연필", stock: 10},
+                {id: 2, product: "노트", stock: 100},
+                {id: 3, product: "지우개", stock: 5},
+                {id: 4, product: "볼펜", stock: 30},
+            ];
+            studentList2.sort((a, b) => a.stock - b.stock);
+            console.log(studentList2);
+
+            const cafe2 = [
+                {
+                    item: "coffee",
+                    amount: 5,
+                },
+                {
+                    item: "cake",
+                    amount: 4,
+                },
+                {
+                    item: "tea",
+                    amount: 7,
+                },
+                {
+                    item: "cookie",
+                    amount: 3,
+                },
+            ];
+            // 1개 이상의 요소가 조건에 맞는지 찾을 때에는 some()
+            console.log(cafe2.some(i => i.amount >= 5)); //true
+
+            // 모든 요소가 조건에 맞는지 찾을 때에는 every()
+            console.log(cafe2.every(i => i.amount >= 3)); //true
+        </script>
+    </body>
+</html>
