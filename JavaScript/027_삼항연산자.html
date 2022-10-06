@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>삼항연산자</title>
+    </head>
+    <body>
+        <script>
+            // 조건식 ? 참일 경우 실행되는 표현식 : 거짓일 경우 실행되는 표현식
+
+            let item = true ? 100 : 200;
+            console.log(item);
+
+            const price = 7000;
+            const message = price > 6000 ? "비싸요!" : "안비싸요!";
+            console.log(message);
+
+            const price2 = 5000;
+            const message2 = price2 > 6000 ? "비싸요!" : price2 < 3000 ? "엄청싸요!" : "적당해요!";
+            console.log(message2);
+
+            // 삼항연산자 중첩해서 사용하는 것은 좋지 않은 습관
+        </script>
+    </body>
+</html>

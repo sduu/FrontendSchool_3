@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>반복문 while</title>
+    </head>
+    <body>
+        <script>
+            // while (조건문) {
+            //     실행문;
+            // }
+
+            let i;
+
+            console.groupCollapsed("while 문");
+            while (i < 10) {
+                console.log(i);
+                i++;
+            }
+            console.groupEnd();
+
+            console.groupCollapsed("구구단");
+            i = 1;
+            while (i < 10) {
+                let j = 0;
+                while (j < 10) {
+                    console.log(`${i} X ${j} = ${i * j}`);
+                    j++;
+                }
+                i++;
+            }
+            console.groupEnd();
+
+            let value = [10, 20, 30, 40];
+            i = 0;
+            while (i < value.length) {
+                console.log(value[i]);
+                i++;
+            }
+
+            // do while 문
+            console.group("do while");
+            i = 0;
+            do {
+                console.log(i);
+                i += 1;
+            } while (i < 5);
+            console.groupEnd();
+
+            // continue
+            console.group("continue");
+            let num = 0;
+            while (num < 7) {
+                num++;
+                if (num == 4 || num == 5) {
+                    continue;
+                }
+                console.log(num);
+            }
+            console.groupEnd();
+
+            // break
+            console.group("break");
+            num = 0;
+            while (num < 7) {
+                num++;
+                if (num > 5) {
+                    break;
+                }
+                console.log(num);
+            }
+            console.groupEnd();
+
+            // 레이블
+            timestable: for (let x = 2; x < 10; x++) {
+                for (let y = 1; y < 10; y++) {
+                    if (x === 4) break timestable;
+                    console.log(`${x} X ${y} = ${x * y}`);
+                }
+            }
+
+            for (let x = 2; x < 10; x++) {
+                for (let y = 1; y < 10; y++) {
+                    if (x === 4) break;
+                    console.log(`${x} X ${y} = ${x * y}`);
+                }
+            }
+
+            // - 레이블은 반드시 `break`문 또는 `continue`문 위에 있어야 한다.
+            // - `break`문은 모든 레이블에서 사용할 수 있다.
+            // - `continue`문은 반복문에서만 사용 가능하다.
+        </script>
+    </body>
+</html>
