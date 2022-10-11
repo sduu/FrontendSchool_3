@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>반복문_구조분해할당</title>
+    </head>
+    <body>
+        <script>
+            let value = [10, 1, 100, 200, 300, 10];
+            let value2 = {
+                one: 1,
+                two: 2,
+                three: 3,
+                four: 4,
+            };
+
+            console.log(Object.keys(value));
+            console.log(Object.keys(value2));
+
+            // 객체는 for...of로 순회를 돌 수가 없음
+            for (i in value2) {
+                console.log(i);
+            }
+
+            console.log(Object.entries(value));
+            console.log(Object.entries(value2));
+
+            // for...of 문과 구조분해할당
+            for ([i, j] of Object.entries(value2)) {
+                console.log(`key는 ${i}고 value는 ${j}입니다.`);
+            }
+
+            for ([i, j] of [
+                [10, 20],
+                [30, 40],
+            ]) {
+                console.log(i, j);
+            }
+
+            for ([i, j] of [
+                [10, 20, 30],
+                [40, 50, 60],
+            ]) {
+                console.log(i, j); // 30과 60은 받지 못했음
+            }
+
+            // 전개 구문 (Spread Syntax)
+            for ([i, j, ...k] of [
+                [10, 20, 30, 40, 50],
+                [60, 70, 80, 90, 100],
+            ]) {
+                console.log(i, j, k);
+            }
+
+            for ([[i, j], k] of [
+                [[10, 20], 30],
+                [[60, 70], 80],
+            ]) {
+                console.log(i, j, k);
+            }
+
+            for ([i, j] of [
+                [[10, 20], 30],
+                [[60, 70], 80],
+            ]) {
+                console.log(i, j);
+            }
+
+            // 일반 변수 선언의 구조분해할당
+            console.log("――――――――――");
+            let a, b, c;
+            [a, b] = [10, 20];
+            console.log(a, b);
+
+            let one, two, three, four;
+            [one, two, three] = "010-5044-2903".split("-");
+            console.log(one, two, three);
+
+            [one, two, three, ...four] = "010-5044-2903-01-02-03".split("-");
+            console.log(one, two, three, four);
+
+            // 문제 1
+            // a, b, c로 각각을 분해할 것입니다.
+            // a에는 10, b에는 20, 30, 40 c 에는 50 할당하기
+            // [a, ...b, c] = [10, 20, 30, 40, 50][(a, b, c)] = (X)
+            [a, ...b] = [10, 20, 30, 40, 50];
+            c = b.pop();
+            console.log(a, b, c);
+
+            let data = [10, 20, 30, 40, 50];
+            [a, b, c] = [data[0], [data[1], data[2], data[3]], data[4]]; // O
+            console.log(a, b, c);
+
+            // 문제 2
+            // a, b, c로 각각을 분해할 것입니다.
+            // a에는 10, 20, 30 b에는 40 c 에는 50 할당하기
+            // [...a, b, c] = [10, 20, 30, 40, 50] // (X)
+
+            [...a] = [10, 20, 30, 40, 50];
+            [c, b] = [a.pop(), a.pop()];
+            console.log(a, b, c);
+
+            [a, b, c] = [[data[0], data[1], data[2]], data[3], data[4]];
+            console.log(a, b, c);
+
+            // 문제 3 (정상 작동)
+            // a, b, c로 각각을 분해할 것입니다.
+            // a에는 10, 20, 30 b에는 40 c 에는 50 할당하기
+            [a, b, ...c] = [10, 20, 30, 40, 50];
+            console.log(a, b, c);
+
+            // Object 구조분해할당
+            console.log("――――――――――");
+            data = {
+                name: "hojun",
+                age: 10,
+                money: 100,
+            };
+            let {name, age} = data;
+            console.log(name, age);
+
+            let {name2, age2} = {name2: "hojun", age2: "10"};
+            console.log(name2, age2);
+
+            // 변수와 같은 이름의 키와 매핑이 되므로 순서가 달라도 가능
+            data = {
+                money3: 100,
+                name3: "hojun",
+                age3: 100,
+                company3: "weniv",
+            };
+            let {name3, age3, ...rest} = data;
+            console.log(name3, age3, rest);
+
+            // RORO 기법 등의 디자인 패턴에서도 구조분해할당을 많이 사용
+            // https://www.freecodecamp.org/news/elegant-patterns-in-modern-javascript-roro-be01e7669cbd/
+            console.log("――――――――――");
+
+            // 전개 구문의 활용
+            console.log("――――――――――");
+            a = [10, 20, 30];
+            a.push(100);
+            a.unshift(1000);
+            console.log(a);
+
+            a = [10, 20, 30];
+            a = [1000, 100, ...a];
+            console.log(a);
+
+            a = [1, 2, 3];
+            b = [10, 20, 30];
+            c = [...a, ...b];
+            console.log(c);
+
+            let str = "hello";
+            console.log([str]);
+            console.log([...str]);
+
+            console.log("!".repeat(10));
+            console.log([..."!".repeat(10)]);
+        </script>
+    </body>
+</html>

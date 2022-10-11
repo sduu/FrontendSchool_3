@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>함수</title>
+    </head>
+    <body>
+        <script>
+            //////////////함수의 구조/////////////////
+            // 파선아실 : 파라미터는 선언, 아규먼트는 실제 입력 값
+            function 안녕(파라미터) {
+                console.log(파라미터);
+                console.log("hello world");
+                return 100;
+            }
+            let 아규먼트 = 1000;
+            console.log(안녕(아규먼트));
+
+            // return
+            console.log("――――――――");
+            console.log("안녕 + 안녕", 안녕(아규먼트) + 안녕(아규먼트));
+
+            console.log("hello world");
+            console.log(console.log("hello world")); // undefined return
+
+            function 안녕2() {
+                console.log("hello2");
+            }
+            console.log("안녕2", 안녕2()); // undefined return
+
+            // return 구문을 만나면 함수를 종료 하고 호출된 자리에 return 값을 내보냄
+            function 안녕3() {
+                console.log("hello3");
+                console.log("hello3");
+                return;
+                console.log("hello3");
+                console.log("hello3");
+            }
+            안녕3();
+
+            // 이렇게 작성하면 안 됨
+            function sum(a, b) {
+                return a * b;
+            }
+
+            console.log(sum(10, 20));
+
+            //////////////함수를 사용하는 이유/////////////////
+            // 1. 재사용성 : 재사용하지 않을 코드는 함수로 정의하나요? 가능하면 함수로 만드는 것을 권합니다.
+            // 2. 유지보수 : 구조 파악 용이 + 변수의 스코프 제한
+            // 3. 구조 파악이 용이
+            // 4 (참고). 추상화로 개발하는 것이 객체지향 프로그래밍(OOP, Object Oriented Programming) 언어의 언어 철학에 맞다
+
+            /*
+                        땅파기();
+                        기반다지기();
+                        기둥세우기();
+                        벽돌쌓기();
+                        지붕올리기();
+                        */
+
+            //////////////함수의 다양한 형태/////////////////
+            // 1.함수의 아규먼트에 따른 반환값
+            console.log("――――――――");
+            function 함수1(a, b, c) {
+                return a + b + c;
+            }
+
+            // 콘솔창에 입력 시 80 출력 : 콘솔창의 기능이다. 마지막 라인에 한하여 console.log()를 찍지 않아도 return 값을 console 창에 출력
+            함수1(10, 20, 30);
+
+            console.log(함수1(10, 20, 30));
+
+            // 필요 이상의 아규먼트를 넣었을 때: error를 출력하지 않는다
+            console.log(함수1(10, 20, 30, 40));
+
+            // 필요 이하의 아규먼트를 넣었을 때 : 전달 되지 않은 값은 undefined
+            console.log(함수1(10, 20)); // NaN
+
+            // 2. 구조분해할당을 이용한 아규먼트 처리
+            function 함수2(a, b, ...c) {
+                console.log("c :", c);
+                return Math.max(...c);
+            }
+
+            console.log(함수2("hello", "world", 10, 20, 30, 40));
+
+            function 함수2([a, b], ...c) {
+                console.log(a);
+                console.log(b);
+                console.log(c);
+            }
+
+            함수2([1, 2], 10, 20, 30, 40);
+
+            // 3. 기본값 할당
+            console.log("――――――――");
+            function 함수3(a = 10, b = 20, c = 30) {
+                // return a + b + c;
+                return `${a} + ${b} + ${c}`;
+            }
+
+            console.log(함수3()); // 60
+            console.log(함수3(100)); // 150
+            console.log(함수3(100, 200)); // 330
+            console.log(함수3(100, 200, 300)); // 600
+
+            console.log(함수3((c = 1000))); // 1050
+
+            // 변수 명이 달라도 순서대로 들어감
+            console.log(함수3(((c = 1000), (a = 2000)))); // 2050
+
+            // 4. 함수에서 객체를 아규먼트로
+            // https://www.freecodecamp.org/news/elegant-patterns-in-modern-javascript-roro-be01e7669cbd/
+            // 개선할 여지가 있는 예제
+            console.log("――――――――");
+            function 함수4(회원등급, 글쓰기, 글읽기, 채널관리, 백업, 소셜로그인여부) {
+                // 회원 등급
+                console.log("함수 기능");
+                return;
+            }
+
+            함수4("Gold", true, true, true, "대화방 전체 백업 가능", true);
+
+            function 함수4({회원등급, 글쓰기, 글읽기, 채널관리, 백업, 소셜로그인여부}) {
+                // 회원 등급 권한
+                console.log(회원등급, 글쓰기, 글읽기, 채널관리, 백업, 소셜로그인여부);
+                return;
+            }
+
+            함수4({
+                회원등급: "Gold",
+                글쓰기: true,
+                글읽기: true,
+                채널관리: false,
+                백업: "부분가능",
+                소셜로그인여부: true,
+            });
+
+            function 함수4({회원등급 = "Silver", 글쓰기 = false, 글읽기 = false, 채널관리 = false, 백업 = "불가능", 소셜로그인여부 = false}) {
+                // 회원 등급 권한
+                console.log(회원등급, 글쓰기, 글읽기, 채널관리, 백업, 소셜로그인여부);
+                return;
+            }
+
+            함수4({
+                회원등급: "Gold",
+                소셜로그인여부: true,
+            });
+
+            let {one, two, three} = {one: 10, two: 20, three: 30};
+            function 함수4({회원등급} = {회원등급: "test"}) {
+                console.log(회원등급);
+                return;
+            }
+            함수4();
+
+            function 함수5(a = 10, b = 20, c = 30) {
+                return a + b + c;
+            }
+            console.log("case1", 함수5());
+            console.log("case1", 함수5({}));
+
+            function 함수6({a = 10, b = 20, c = 30}) {
+                return a + b + c;
+            }
+            // console.log("case2", 함수6()); // 에러
+            console.log("case2", 함수6({}));
+
+            // 위 코드를 축소해서 작성한 것이 아래의 코드다.
+            // object의 기본값을 설정해서 아규먼트 없이 함수를 실행할 수 있게 해준다.
+            function 함수5({a = 10, b = 20, c = 30} = {}) {
+                return a + b + c;
+            }
+            // 객체가 매핑이 안됐기때문에 구조분해할당이 되지 않고 a=2, b=1, c=3만 실행되어 리턴
+            console.log("case3", 함수5());
+            console.log("case3", 함수5({}));
+
+            // let {one = 1, two = 2} = {one: 100};
+            // let {one = 1, two = 2} = {};
+            // let {one = 1, two = 2} = ; // 에러가 나는 이유 : 구조분해할 객체가 아예 존재하지 않음
+
+            ////// 재귀 함수 //////
+            console.log("――――――――");
+            // 재귀함수(Top-down, 분할정복) ↔ 반복문(Bottom-up)
+            function factorial(n) {
+                if (n <= 1) {
+                    // 종료 조건이 없으면 무한 반복
+                    return 1;
+                }
+
+                return n * factorial(n - 1);
+            }
+            console.log(factorial(5));
+
+            let result = 1;
+            for (let i = 1; i < 6; i++) {
+                result *= i;
+            }
+            console.log(result);
+            /*
+            5! = 5 * 4 * 3 * 2 * 1
+
+                            n       n <= 1      return
+            factorial(5)    5       false       5 * factorial(4) = 120
+            factorial(4)    4       false       4 * factorial(3) = 24
+            factorial(3)    3       false       3 * factorial(2) = 6
+            factorial(2)    2       false       2 * factorial(1) = 2
+            factorial(1)    1       true        1
+            */
+
+            // 누적합은 아래 코드들이 좋은 코드는 아니다
+            function 누적합(n) {
+                if (n <= 1) {
+                    // 종료 조건이 없으면 무한 반복
+                    return 1;
+                }
+
+                return n + 누적합(n - 1);
+            }
+            console.log(누적합(100));
+
+            result = 0;
+            for (let i = 1; i <= 100; i++) {
+                result += i;
+            }
+            console.log(result);
+
+            // 누적합 공식
+            // 순회를 돌지 않고 해결할 수 있으면 돌지 않고 해결하기
+            let n = 100;
+            console.log((n * (n + 1)) / 2);
+
+            // 재귀함수로 문자열을 뒤집는 코드를 작성하세요.
+            let txt = "hello world";
+            function reverse(txt) {
+                if (txt.length === 1) {
+                    return txt;
+                }
+                return reverse(txt.slice(1)) + txt[0];
+            }
+            console.log(reverse(txt));
+
+            result = "";
+            for (const i of txt) {
+                result = i + result;
+            }
+            console.log(result);
+
+            /*
+            참고사항
+            'hello'.slice(1)
+            'ello'
+
+            n                   txt.length <= 1         return
+            reverse('hello')    false                   reverse(txt.slice(1)) + 'h' = 'olleh'
+            reverse('ello')     false                   reverse(txt.slice(1)) + 'e' = 'olle'               
+            reverse('llo')      false                   reverse(txt.slice(1)) + 'l' = 'oll'            
+            reverse('lo')       false                   reverse(txt.slice(1)) + 'l' = 'ol'                      
+            reverse('o')        true                    'o'                      
+            */
+
+            // 지역변수와 전역변수
+            console.log("――――――――");
+            // 스코프에 대한 좋은 글
+            // https://velog.io/@bico/JavaScript-%EB%A0%89%EC%8B%9C%EC%BB%AC-%EC%8A%A4%EC%BD%94%ED%94%84lexical-scope
+
+            // 블록레벨스코프
+            if (true) {
+                // for문에서도 마찬가지
+                let x1 = 10;
+                const y1 = 10;
+            }
+            // console.log(x1, y1); // x1 is not defined
+
+            // 밖에 선언된 x2는 함수 내부에서도 접근 가능하다
+            let x2 = 100;
+            function xplus() {
+                x2 = x2 + 10;
+            }
+            xplus();
+            console.log(x2);
+
+            let x3 = 100;
+            // 함수가 종료된 다음에는 선언된 변수는 휘발된다
+            // 메모리 효율을 높일 수 있다
+            function xplus() {
+                // x3 = x3 + 10; // Cannot access 'x3' before initialization
+            }
+
+            // 함수 안에 함수
+            function fa() {
+                console.log("a 실행");
+                function fb() {
+                    console.log("b 실행");
+                }
+                fb();
+            }
+            fa();
+            // fb(); // fb is not defined
+
+            // 화살표 함수
+            // https://ko.javascript.info/arrow-functions-basics
+            function 함수11(x, y) {
+                return x + y;
+            }
+
+            let 함수12 = (x, y) => x + y;
+
+            console.log(함수11.name);
+            console.log(함수12.name);
+
+            function 함수13(x, y) {
+                let z = x + y;
+                return z;
+            }
+
+            let 함수14 = (x, y) => {
+                let z = x + y;
+                return z;
+            };
+
+            // 차이점 : 호이스팅이 다름. 35번 파일로 이어짐
+        </script>
+    </body>
+</html>
