@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>this 질의응답</title>
+    </head>
+    <body>
+        <script>
+            [1, 2, 3].map(
+                function () {
+                    console.log(this);
+                },
+                [10, 20, 30]
+            );
+
+            // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+            // callback 함수에서 최종적으로 볼 수 있는 this 값은 함수 내 this를 정하는 일반적인 규칙에 따라 결정됩니다.
+            [1, 2, 3].map(v => {
+                console.log(this);
+            }, 1);
+
+            const person = {
+                name: "hojun",
+                age: 25,
+                a() {
+                    console.log(this);
+                    console.log(this.name);
+                    function b() {
+                        console.log(this);
+                        console.log(this.name);
+                        function c() {
+                            console.log(this);
+                            console.log(this.name);
+                        }
+                        c();
+                    }
+                    b();
+                },
+            };
+            person.a();
+
+            //출력
+            //{name: 'hojun', age: 25, a: ƒ}
+            //hojun
+
+            //Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+            //''
+
+            //Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+
+            // a에서 this = person
+            // b에서 this = 상위스코프(상위에서 person을 보고있음) 즉 person
+            // c에서 this = 상위스코프(상위에서 person을 보고있음) 즉 person
+            const person = {
+                name: "hojun",
+                age: 25,
+                a() {
+                    console.log(this);
+                    console.log(this.name);
+                    let b = () => {
+                        console.log(this);
+                        console.log(this.name);
+                        let c = () => {
+                            console.log(this);
+                            console.log(this.name);
+                        };
+                        c();
+                    };
+                    b();
+                },
+            };
+            person.a();
+
+            //출력
+            //{name: 'hojun', age: 25, a: ƒ}
+            //hojun
+
+            //{name: 'hojun', age: 25, a: ƒ}
+            //hojun
+
+            //{name: 'hojun', age: 25, a: ƒ}
+            //hojun
+        </script>
+    </body>
+</html>
