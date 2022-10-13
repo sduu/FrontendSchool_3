@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>this를 사용한 예시</title>
+    </head>
+    <body>
+        <script>
+            let 호텔 = [
+                {
+                    이름: "하나호텔1",
+                    방의개수: 50,
+                    예약자수: 25,
+                    남은방의개수: function () {
+                        return this.방의개수 - this.예약자수;
+                    },
+                },
+                {
+                    이름: "하나호텔2",
+                    방의개수: 40,
+                    예약자수: 25,
+                    남은방의개수: function () {
+                        return this.방의개수 - this.예약자수;
+                    },
+                },
+                {
+                    이름: "하나호텔3",
+                    방의개수: 30,
+                    예약자수: 25,
+                    남은방의개수: function () {
+                        return this.방의개수 - this.예약자수;
+                    },
+                },
+                {
+                    이름: "하나호텔4",
+                    방의개수: 25,
+                    예약자수: 25,
+                    남은방의개수: function () {
+                        return this.방의개수 - this.예약자수;
+                    },
+                },
+            ];
+
+            console.log(호텔[0]["방의개수"] - 호텔[0]["예약자수"]);
+            console.log(호텔[0].남은방의개수());
+        </script>
+    </body>
+</html>

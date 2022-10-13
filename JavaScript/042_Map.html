@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Map</title>
+    </head>
+    <body>
+        <script>
+            let m = new Map();
+            // 메서드 체이닝
+            m.set("하나", 1).set("둘", 2).set("셋", 3).set("넷", 4).set(true, "트루").set([1, 2], "리얼리?");
+
+            console.log(m);
+            console.log(m.get(true)); // object에서 가능하지 않습니다.
+            console.log(m.get([1, 2])); // undefined: 각 객체가 다른 주소값을 가짐
+
+            // Python Vs JavaScript
+            // 1. Python
+            // python에서 아래 값은 다르게 나옵니다.
+            // x = [1, 2]
+            // id(x)
+
+            // y = [1, 2]
+            // id(y)
+
+            // x == y // python에서는 true
+            // x is y // python에서는 false
+
+            // 2. JavaScript
+            // [1, 2] === [1, 2] //false
+            // [1, 2] == [1, 2] // false
+            // let x = [1, 2]
+            // let y = [1, 2]
+            // x == y // false
+            // x === y // false
+
+            m = new Map();
+            let test = [1, 2];
+
+            m.set("하나", 1).set(true, "트루").set([1, 2], "리얼리?");
+
+            console.log(m.get(test)); // 이렇게 호출 가능: 변수에 할당하면 같은 메모리 주소값을 바라보고 있음
+
+            // Map에 해당 key값이 있는지 확인하기
+            console.log(m.has("하나"));
+
+            // Map에 값을 제거하기
+            m.delete("하나");
+            console.log(m.has("하나"));
+
+            // 크기 구하기
+            console.log(m.size);
+
+            // 맵에는 이터러블한 데이터가 들어갈 수 있다
+            let data = new Map([
+                ["one", 1],
+                ["two", 2],
+            ]); // O
+            let data = new Map(Object.entries({one: 1, two: 2})); // O
+            let data = new Map({one: 1, two: 2}); // X
+            // let data = new Map('hello world') // X
+            // let data = new Map([10, 20, 30, 40]) // X
+
+            for (const i of m) {
+                console.log(i);
+            }
+
+            for (const [i, j] of m) {
+                console.log(i, j);
+            }
+
+            m.keys();
+            m.values();
+            m.entries();
+
+            // Map - Object 간의 형 변환
+            let 맵 = new Map(Object.entries({one: 1, two: 2}));
+            let 오브젝트 = Object.fromEntries(맵);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>forEach 주의사항</title>
+    </head>
+    <body>
+        <ul>
+            <li>hello</li>
+            <li>hello</li>
+            <li>hello</li>
+            <li>hello</li>
+            <li>hello</li>
+        </ul>
+        <script>
+            let e = document.querySelectorAll("li");
+            console.log(e);
+
+            e.forEach(); // NodeList 에 forEach()는 IE에서 작동하지 않는다.
+        </script>
+    </body>
+</html>
