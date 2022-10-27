@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>실습</title>
+        <style>
+            .box {
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+                transition: 0.3s ease-in-out;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"></div>
+        <script>
+            // class Box {
+            //     constructor(el) {
+            //         this.el = el;
+            //         this.width = el.getBoundingClientRect().width;
+            //         this.x = el.getBoundingClientRect().x - el.offsetLeft;
+            //         this.bindEvent();
+            //     }
+
+            //     bindEvent() {
+            //         document.addEventListener("keydown", () => this.handleKeydown());
+            //     }
+
+            //     handleKeydown() {
+            //         if (event.keyCode == 39) {
+            //             this.moveLeft();
+            //         } else if (event.keyCode == 37) {
+            //             this.moveRight();
+            //         }
+            //         this.el.style.transform = `translate3D(${this.x}px, 0, 0)`;
+            //     }
+
+            //     moveLeft() {
+            //         this.x += this.width;
+            //     }
+
+            //     moveRight() {
+            //         this.x -= this.width;
+            //     }
+            // }
+
+            // const box = new Box(document.querySelector(".box"));
+
+            const target = document.querySelector(".box");
+            let pos = 0;
+
+            document.addEventListener("keydown", move);
+
+            function move(event) {
+                const keyName = event.key;
+                if (keyName === "ArrowRight") {
+                    pos += 5;
+                    target.style.transform = `translateX(${pos}px)`;
+                }
+                if (keyName === "ArrowLeft") {
+                    pos -= 5;
+                    target.style.transform = `translateX(${pos}px)`;
+                }
+            }
+        </script>
+    </body>
+</html>

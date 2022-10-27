@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>비공개 프로퍼티</title>
+    </head>
+    <body>
+        <script>
+            class Robot {
+                #password;
+
+                constructor(name, pw) {
+                    this.name = name;
+                    this.#password = pw;
+                }
+
+                sayYourName() {
+                    console.log(`삐리비리. 제 이름은 ${this.name}입니다. 주인님.`);
+                }
+
+                getPassword() {
+                    return this.#password;
+                }
+
+                setPassword(pw) {
+                    this.#password = pw;
+                }
+            }
+
+            const robot = new Robot("웨이드", 1234);
+            // 비공개 프로퍼티에 점 연산자로 접근할 수 없음
+            // console.log(robot.#password); // SyntaxError
+
+            console.log(robot.getPassword());
+            robot.setPassword(5678);
+            console.log(robot.getPassword());
+
+            // 사용자 정의 타입으로는 어떻게 비공개 프로퍼티를 만들 수 있을까? => 클로저
+            // 모듈 사용자 정의 혼합패턴
+            function Person() {
+                let age = 30; // 비공개 프로퍼티로
+
+                function innerPerson() {}
+
+                innerPerson.prototype.getAge = function () {
+                    return age;
+                };
+
+                return innerPerson;
+            }
+
+            const PersonFunc = Person();
+            const person = new PersonFunc();
+
+            console.log(person); // innerPerson
+            console.log(person.getAge()); // 30
+            console.log(person.age); // undefined
+
+            // 즉시 실행 함수(IIFE) : 선언과 동시에 실행
+            // (function () {
+            //     console.log("IIFE");
+            // })();
+
+            // IIFE를 이용한 모듈 사용자 정의 혼합패턴
+            const NewPerson = (function () {
+                let age = 30;
+
+                function innerPerson() {}
+
+                innerPerson.prototype.getAge = function () {
+                    return age;
+                };
+
+                return innerPerson;
+            })();
+
+            const personWithSecret = new NewPerson();
+            console.log(personWithSecret.getAge()); // 30
+        </script>
+    </body>
+</html>
