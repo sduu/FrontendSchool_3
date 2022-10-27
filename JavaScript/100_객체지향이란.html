@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>생성자</title>
+    </head>
+    <body>
+        <script>
+            const me = {
+                name: "웨이드",
+                address: "제주도 제주시 인다 1길",
+                phoneNum: "010-8001-6536",
+                canWalk: function () {
+                    console.log("웨이드가 걷는다.");
+                },
+                teaching: function (student) {
+                    student.levelUp();
+                },
+            };
+
+            const student = {
+                level: 1,
+                levelUp: function () {
+                    this.level++;
+                },
+            };
+
+            console.log(student);
+            console.log("me.teaching(student)");
+            me.teaching(student);
+            console.log(student);
+
+            function NewFactory(name) {
+                this.name = name;
+                this.sayYourName = function () {
+                    console.log(`삐리비리. 제 이름은 ${this.name}입니다. 주인님.`);
+                };
+            }
+
+            let robot1 = new NewFactory("브랜든");
+            let robot2 = new NewFactory("웨이드");
+
+            console.log(robot1);
+            console.log(robot1.sayYourName());
+            console.log(robot2.sayYourName());
+
+            // 실습 : 음식 이름의 배열을 전달하면 배열안에서 랜덤하게 메뉴를 뽑아내는 로봇객체의 생성자를 만들어보세요.
+            function Robot(foods) {
+                this.foods = foods;
+                this.chooseFood = function () {
+                    const random = parseInt(Math.random() * this.foods.length);
+                    console.log(this.foods[random]);
+                };
+            }
+
+            const food1 = new Robot(["붕어빵", "떡볶이", "소금빵", "파스타", "마라탕"]);
+            food1.chooseFood();
+        </script>
+    </body>
+</html>

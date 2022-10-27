@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>객체의 상속</title>
+    </head>
+    <body>
+        <script>
+            // 보모 생성자를 상속받는 방법
+            function Parent() {
+                this.name = "재현";
+            }
+            Parent.prototype.rename = function (name) {
+                this.name = name;
+            };
+            Parent.prototype.sayName = function () {
+                console.log(this.name);
+            };
+
+            function Child() {
+                console.log(this);
+                Parent.call(this); // Child 함수의 this가 Parent 생성자 함수의 this를 바라봄
+                console.log(this); // Child {name: '재현'}
+            }
+
+            Child.prototype = Object.create(Parent.prototype); // Parent.prototype를 Child.prototype에 연결
+
+            // Child 객체는 Parent 객체의 모든 것을 상속
+
+            Child.prototype.canWalk = function () {
+                console.log("now i can walk!!");
+            };
+
+            const child = new Child();
+            console.log(child.name); // 재현
+
+            child.rename("소을");
+            child.sayName(); // 소을
+        </script>
+    </body>
+</html>

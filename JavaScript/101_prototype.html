@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>프로토타입</title>
+    </head>
+    <body>
+        <script>
+            function NewFactory(name) {
+                this.name = name;
+                this.sayYourName = function () {
+                    console.log(`삐리비리. 제 이름은 ${this.name}입니다. 주인님.`);
+                };
+            }
+
+            let robot1 = new NewFactory("브랜든");
+            let robot2 = new NewFactory("브랜든");
+
+            // 객체의 메서드를 등록 할때마다 새로운 함수를 생성
+            console.log(robot1.sayYourName === robot2.sayYourName); // false
+
+            // 객체안에는 생성자 함수의 프로토타입을 참조할 수 있는 __proto__ 라는 숨겨진 프로퍼티가 존재
+            // console.log(robot1.[[prototype]]); // SyntaxError
+            console.log(robot1.__proto__); // {constructor: ƒ}
+            console.log(robot1.__proto__ === NewFactory.prototype); // true
+
+            // 프로토타입은 생성자 함수에 존재. 인스턴스에 존재하지 않음
+            console.log(robot1.prototypeOf); // undefined
+            console.log(NewFactory.prototype); // {constructor: ƒ}
+
+            /////
+            function NewFactory2(name) {
+                this.name = name;
+            }
+
+            NewFactory2.prototype.sayYourName = function () {
+                console.log(`삐리비리. 제 이름은 ${this.name}입니다. 주인님.`);
+            };
+
+            const robot3 = new NewFactory2("게리");
+            const robot4 = new NewFactory2("알리");
+
+            // 프로토타입이라는 임의의 공간을 공유
+            // 프로토타입을 활용하면 메모리 공간 낭비가 적음
+            console.log(robot3.sayYourName === robot4.sayYourName); // true
+
+            // 실습 : 우리가 만들었던 음식 로봇객체의 메서드를 프로토타입으로 분리해보세요, 그리고 객체의 메서드가 서로 동일한 주소를 참조하는지 확인해보세요.
+            function Robot(foods) {
+                this.foods = foods;
+            }
+            Robot.prototype.chooseFood = function () {
+                const random = parseInt(Math.random() * this.foods.length);
+                console.log(this.foods[random]);
+            };
+
+            const food1 = new Robot(["붕어빵", "떡볶이", "소금빵", "파스타", "마라탕"]);
+            const food2 = new Robot(["민초", "빙수", "아이스크림", "아메리카노", "버블티"]);
+
+            food1.chooseFood();
+            food2.chooseFood();
+            console.log(food1.chooseFood === food2.chooseFood); // true
+        </script>
+    </body>
+</html>
