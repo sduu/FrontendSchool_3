@@ -1,6 +1,8 @@
 // 닌자코드의 길
-// 왜 안되는지 찾아보겠습니다.
-// const q = document.querySelector;
+// 아래와 같이 사용하면 작동하지 않습니다.
+// const dq = document.querySelector;
+// bind와 함게 사용해주어야 합니다.(메소드 내에 this가 document로 바인딩되어야 제대로 작동하게 되어 있습니다.)
+// const dq = document.querySelector.bind(document);
 
 // section
 const loadingSection = document.querySelector(".cont-result-loading");
@@ -54,7 +56,7 @@ function calculate() {
 
 function openModal() {
     // console.log('2')
-    modalSection.style.display = "block";
+    modalSection.style.display = "flex";
 }
 
 function closeModal() {

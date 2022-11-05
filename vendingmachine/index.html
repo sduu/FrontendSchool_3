@@ -9,8 +9,6 @@
         <link rel="stylesheet" href="src/style/style.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <!-- 구글 폰트 장점 : 최적화되어서 용량이 적음 -->
-        <!-- 구글 폰트 단점 : 구글 서버가 다운되면 사용 불가 -->
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet" />
     </head>
 
@@ -22,7 +20,6 @@
             <section class="vending-machine">
                 <h2 class="ir">자판기 화면</h2>
                 <ul class="list-item"></ul>
-
                 <section class="cont-buy">
                     <h3 class="ir">구입 관련 정보</h3>
                     <div class="info-balance">
@@ -34,29 +31,7 @@
                     <input type="number" id="inpPut" class="inp-put" placeholder="입금액 입력" />
                     <button type="button" class="btn-put">입금</button>
 
-                    <ul class="list-item-staged">
-                        <li>
-                            <button type="button" class="btn-staged" data-item="Cool Cola">
-                                <img src="src/images/Cool_Cola.png" alt="" class="img-item" />
-                                <strong class="txt-item">Cool_Cola</strong>
-                                <span class="num-counter">1</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="btn-staged" data-item="Cool Cola">
-                                <img src="src/images/Cool_Cola.png" alt="" class="img-item" />
-                                <strong class="txt-item">Cool_Cola</strong>
-                                <span class="num-counter">1</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="btn-staged" data-item="Cool Cola">
-                                <img src="src/images/Cool_Cola.png" alt="" class="img-item" />
-                                <strong class="txt-item">Cool_Cola</strong>
-                                <span class="num-counter">1</span>
-                            </button>
-                        </li>
-                    </ul>
+                    <ul class="list-item-staged"></ul>
                     <button type="button" class="btn-get">획득</button>
                 </section>
             </section>
@@ -65,30 +40,17 @@
                 <div class="cont-mymoney">
                     <div class="info-mymoney">
                         소지금 :
-                        <span class="txt-mymoney">30,000원</span>
+                        <span class="txt-mymoney">100,000,000원</span>
                     </div>
                 </div>
 
                 <div class="cont-myitems">
                     <strong class="tit-myitem">획득한 음료</strong>
-                    <ul class="list-item-staged">
-                        <li>
-                            <img src="src/images/Cool_Cola.png" alt="" class="img-item" />
-                            <strong>Cool_Cola</strong>
-                            <span class="num-counter">1</span>
-                        </li>
-                        <li>
-                            <img src="src/images/Cool_Cola.png" alt="" class="img-item" />
-                            <strong>Cool_Cola</strong>
-                            <span class="num-counter">1</span>
-                        </li>
-                    </ul>
+                    <ul class="list-item-staged"></ul>
                     <strong class="txt-total">총금액 : 0원</strong>
                 </div>
             </section>
         </article>
-
-        <!-- 모듈화된 js 파일은 로컬에서는 확인 할 수 없다 -->
         <script type="module" src="src/js/index.js"></script>
     </body>
 </html>

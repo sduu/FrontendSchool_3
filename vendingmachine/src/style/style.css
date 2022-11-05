@@ -135,7 +135,6 @@ body {
 }
 
 .cont-buy .btn-get {
-    color: #fff;
     background-color: #6327fe;
 }
 
@@ -237,11 +236,6 @@ body {
 
 .my-info .list-item-staged {
     height: 368px;
-}
-
-.my-info .list-item-staged li {
-    overflow: hidden;
-    padding: 8px;
 }
 
 .my-info .txt-total {
