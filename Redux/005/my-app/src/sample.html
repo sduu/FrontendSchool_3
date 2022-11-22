@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.js"></script>
+    </head>
+
+    <body>
+        <style>
+            div {
+                display: inline-block;
+            }
+
+            .container {
+                display: inline-block;
+                width: 100px;
+                height: 200px;
+                margin-top: 40px;
+                padding: 10px;
+                border: 5px solid black;
+                border-radius: 0px;
+            }
+        </style>
+
+        <button class="btn-rec">사각형</button>
+        <button class="btn-rounded">둥근 사각형</button>
+        <button class="btn-circle">원</button>
+        <button class="btn-skyblue">하늘색</button>
+
+        <br />
+
+        <div id="one"></div>
+        <div id="two"></div>
+        <div id="three"></div>
+
+        <script>
+            function reducer(state, action) {
+                if (state == undefined) {
+                    // 초깃값
+                    return {borderRadius: "0px", color: "white"};
+                }
+
+                var newState;
+                if (action.type === "CHANGE_RADIUS") {
+                    newState = {...state, borderRadius: action.borderRadius};
+                } else if (action.type === "CHANGE_COLOR") {
+                    newState = {...state, color: action.color};
+                }
+
+                return newState;
+            }
+
+            const store = Redux.createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+            function one() {
+                const state = store.getState();
+                console.log(state);
+                document.querySelector("#one").innerHTML = `<div class="container" style="border-radius: ${state.borderRadius}; background-color: ${state.color}"></div>`;
+            }
+            store.subscribe(one);
+            one();
+
+            function two() {
+                const state = store.getState();
+                console.log(state);
+                document.querySelector("#two").innerHTML = `<div class="container" style="border-radius: ${state.borderRadius}; background-color: ${state.color}"></div>`;
+            }
+            store.subscribe(two);
+            two();
+
+            function three() {
+                const state = store.getState();
+                document.querySelector("#three").innerHTML = `<div class="container" style="border-radius: ${state.borderRadius}; background-color: ${state.color}"></div>`;
+            }
+            store.subscribe(three);
+            three();
+
+            document.querySelector(".btn-rec").addEventListener("click", () => {
+                store.dispatch({type: "CHANGE_RADIUS", borderRadius: "0px"});
+            });
+            document.querySelector(".btn-rounded").addEventListener("click", () => {
+                store.dispatch({type: "CHANGE_RADIUS", borderRadius: "5%"});
+            });
+            document.querySelector(".btn-circle").addEventListener("click", () => {
+                store.dispatch({type: "CHANGE_RADIUS", borderRadius: "50%"});
+            });
+            document.querySelector(".btn-skyblue").addEventListener("click", () => {
+                store.dispatch({type: "CHANGE_COLOR", color: "skyblue"});
+            });
+        </script>
+    </body>
+</html>
