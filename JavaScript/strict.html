@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // "use strict";
+
+            // str = 'hello strict';
+
+            // strict 모드가 아닐 때는 조용한 에러 (무시한다)
+            var undefined = "undefined";
+            var Infinity = 100;
+            Math.PI = 0;
+
+            const employee = {
+                firstName: "Jhon",
+                lastName: "Doe",
+            };
+
+            console.log(employee.firstName);
+
+            delete employee.firstName;
+
+            console.log(employee.firstName);
+
+            // strict 모드에서 네이티브 코드로 구현되어있는 객체의 프로퍼티는 삭제할 수 없음
+            delete Object.prototype;
+
+            function myFunc(a, a, b) {
+                console.log(a + a + b);
+            }
+
+            myFunc(1, 2, 3); // 7, strict 모드 : Duplicate parameter error
+        </script>
+    </body>
+</html>
